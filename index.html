@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Adressomat API Implementation</title>
+        <meta charset="utf-8">
+        <!-- API Implementation -->
+        <script src="adressomat/adressomatv0.1.js"></script>
+        <script>
+            let api = new Adressomat({
+                key : "YOUR_API_KEY_HERE"
+            })
+
+            api.query({
+                query : "Spielplatzstraße 19",
+                limit : 50,
+                callbackSuccess : function(data){
+                    console.log(data)
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Adressomat API Implementation</h1>
+        <p>Open console for details, see source code of this file for implementation</p>
+    </body>
+</html>
