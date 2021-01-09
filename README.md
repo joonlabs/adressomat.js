@@ -1,5 +1,5 @@
 # adressomat-api-js
-This is the home for the javascript binding of the adressomat's api. From here you can [download](https://github.com/joonlabs/adressomat-api-js/adressomat/adressomatv0.1.js "Download the js-api-file.") the current version and use it for you projects.
+This is the home for the javascript binding of the adressomat's api. From here you can [download](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/adressomat/adressomatv0.1.js "Download the js-api-file.") the current version and use it for you projects.
 For access keys and pricing information, please contact us.
 
 ## usage
