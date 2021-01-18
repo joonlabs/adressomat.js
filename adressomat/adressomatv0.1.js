@@ -1,6 +1,7 @@
 class Adressomat{
     key = null;
-    API_ENDPOINT= "https://api.webseitenlabor.com/api/";
+    API_ENDPOINT= "https://adressomat.de/api/";
+    
     /*
     create an instance of the Adressomat-class
      */
