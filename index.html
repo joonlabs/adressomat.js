@@ -1,18 +1,39 @@
-<html>
+<html lang="en">
     <head>
         <title>Adressomat API Implementation</title>
-        <meta charset="utf-8">
+        <meta charSet="utf-8">
         <!-- API Implementation -->
-        <script src="adressomat/adressomatv0.1.js"></script>
+        <script src="js/adressomat.js"></script>
         <script>
-            let api = new Adressomat({
-                key : "YOUR_API_KEY_HERE"
+            let api = new AdressOMat({
+                key: "YOUR_API_KEY_HERE"
             })
 
+            /*
+            perform a query request to the api, for looking up addresses by a given query
+             */
             api.query({
-                query : "Spielplatzstraße 19",
-                limit : 50,
-                callbackSuccess : function(data){
+                query: "Spielplatzstraße 19",
+                limit: 50,
+                callbackSuccess: function (data) {
+                    console.log(data)
+                },
+                callbackError: function (data) {
+                    console.log(data)
+                }
+            })
+
+            /*
+            perform a geocode request to the api, for looking up addresses near given coordinates
+             */
+            api.geocode({
+                latitude: 51.754566,
+                longitude: 8.59941,
+                limit: 25,
+                callbackSuccess: function (data) {
+                    console.log(data)
+                },
+                callbackError: function (data) {
                     console.log(data)
                 }
             })
