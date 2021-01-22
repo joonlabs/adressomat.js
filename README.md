@@ -1,19 +1,43 @@
-# adressomat-api-js
-This is the home for the javascript binding of the adressomat's api. From here you can [download](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/adressomat/adressomatv0.1.js "Download the js-api-file.") the current version and use it for you projects.
-For access keys and pricing information, please contact us.
+# Adress-O-Mat API (JS)
+This is the  the javascript binding's home of the adressomat's api. From here you can [download](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") the current version and use it for your projects.
+For access keys and pricing information, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
 
-## usage
-Just download (or clone) the .js-file in the ```adressomat/``` folder and include it into your project.
-after loading the script you can create an object and use it as described in the foloowing example:
+## Usage
+Just download (or clone) the .js-file in the ```js/``` folder and include it into your project.
+After loading the script into your project you can create an object of the ```AdressOMat```class and use it as described in the following examples.
+### /api/query/
+The ```/api/query/``` endpoint allows you to search for addresses by string:
 ```javascript
-let api = new Adressomat({
+let api = new AdressOMat({
     key : "YOUR_API_KEY_HERE"
 })
 
 api.query({
-    query : "Spielplatzstraße 19",
-    limit : 50,
-    callbackSuccess : function(data){
+    query: "Spielplatzstraße 19",
+    limit: 50,
+    callbackSuccess: function (data) {
+        console.log(data)
+    },
+    callbackError: function (data) {
+        console.log(data)
+    }
+})
+```
+### /api/geo/
+The ```/api/geo/``` endpoint allows you to search for addresses by coordinates:
+```javascript
+let api = new AdressOMat({
+    key : "YOUR_API_KEY_HERE"
+})
+
+api.geocode({
+    latitude: 51.754566,
+    longitude: 8.59941,
+    limit: 25,
+    callbackSuccess: function (data) {
+        console.log(data)
+    },
+    callbackError: function (data) {
         console.log(data)
     }
 })
@@ -21,4 +45,4 @@ api.query({
 You can also find a basic implementation of the api in the ```index.html``` file in the root of the repo.
 
 ## licensing and contact
-For more information contact info@joonlabs.com.
+For more informatione, access keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
