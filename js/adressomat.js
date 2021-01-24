@@ -6,7 +6,7 @@ class AdressOMat{
     /*
     create an instance of the Adressomat-class
     */
-    constructor({key = null}) {
+    constructor({key}={key:null}) {
         this.setKey({
             key : key
         })
