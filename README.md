@@ -1,3 +1,7 @@
+![Adress-O-Mat logo](https://adressomat.de/website/images/logo-color.svg)
+
+[![Generic badge](https://img.shields.io/badge/version-1.0-<COLOR>.svg)](https://adressomat.de)
+[![Generic badge](https://img.shields.io/badge/status-available-<COLOR>.svg)](https://adressomat.de/status)
 # Adress-O-Mat API (JS)
 This is the  the javascript binding's home of the adressomat's api. From here you can [download](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") the current version and use it for your projects.
 For access keys and pricing information, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
