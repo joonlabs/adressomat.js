@@ -9,12 +9,22 @@
         window.addEventListener("load", function(){
             AdressOMatInput.init({
                 key: "YOUR_API_KEY_HERE",
+                messages : {
+                    "initial" : "Mindestens 3 Buchstaben eingeben...",
+                    "noData" : "Keine Ergebnisse gefunden",
+                },
+                callbacks : {
+                    "clickResult" :  AdressOMatInput.fillInResults
+                }
             })
         })
+
     </script>
 
     <style>
-        input.first-of-type{ width: 450px; }
+        input.first-of-type{
+            width: 450px;
+        }
     </style>
 </head>
 <body>

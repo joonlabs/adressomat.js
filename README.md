@@ -3,14 +3,15 @@
 [![Generic badge](https://img.shields.io/badge/version-1.0-<COLOR>.svg)](https://adressomat.de)
 [![Generic badge](https://img.shields.io/badge/status-available-<COLOR>.svg)](https://adressomat.de/status)
 # Adress-O-Mat API (JS)
-This is the  the javascript binding's home of the adressomat's api. From here you can [download](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") the current version and use it for your projects.
-For access keys and pricing information, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
+This is the  the javascript binding's home of the adressomat's api. From here you can download [adressomat.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") and [autocomplete.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/autocomplete.js "Download the js-api-file.") and use it for your projects.
 
-## Usage
-Just download (or clone) the .js-file in the ```js/``` folder and include it into your project.
-After loading the script into your project you can create an object of the ```AdressOMat```class and use it as described in the following examples.
-### /api/query/
-The ```/api/query/``` endpoint allows you to search for addresses by string:
+For api keys, data coverage and pricing information, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
+
+## adressomat.js
+Put the ```adressomat.js```-file from the ```js/``` folder into your project and include it.
+After loading the script into the page you can create an instance of the ```AdressOMat```class and use it as described in the following examples.
+### query endpoint
+The ```/api/query/``` endpoint allows you to search for addresses by string and is called via the ```query({query,limit,...})``` method:
 ```javascript
 let api = new AdressOMat({
     key : "YOUR_API_KEY_HERE"
@@ -18,17 +19,17 @@ let api = new AdressOMat({
 
 api.query({
     query: "Spielplatzstraße 19",
-    limit: 50,
-    callbackSuccess: function (data) {
+    limit: 50,  //optional
+    callbackSuccess: function (data) { //optional
         console.log(data)
     },
-    callbackError: function (data) {
+    callbackError: function (data) { //optional
         console.log(data)
     }
 })
 ```
-### /api/geo/
-The ```/api/geo/``` endpoint allows you to search for addresses by coordinates:
+### geo endpoint
+The ```/api/geo/``` endpoint allows you to search for addresses near a given location and is called via the ```geo({latitude,lonitude,limit,...})``` method:
 ```javascript
 let api = new AdressOMat({
     key : "YOUR_API_KEY_HERE"
@@ -37,16 +38,52 @@ let api = new AdressOMat({
 api.geocode({
     latitude: 51.754566,
     longitude: 8.59941,
-    limit: 25,
-    callbackSuccess: function (data) {
+    limit: 25, //optional
+    callbackSuccess: function (data) { //optional
         console.log(data)
     },
-    callbackError: function (data) {
+    callbackError: function (data) { //optional
         console.log(data)
     }
 })
 ```
 You can also find a basic implementation of the api in the ```index.html``` file in the root of the repo.
 
+## autocomplete.js
+The ```autocomplete.js``` script is an extension to the basic ```adressomat.js``` implementation. Include both scripts in your page and initialize the autocompletion of input elements on your page as described below. 
+```javascript
+window.addEventListener("load", function(){
+    AdressOMatInput.init({
+        key: "YOUR_API_KEY_HERE",
+        messages : { //optional (is default)
+            "initial" : "Mindestens 3 Buchstaben eingeben...",
+            "noData" : "Keine Ergebnisse gefunden",
+        },
+        callbacks : { //optional (is default)
+            "clickResult" :  AdressOMatInput.fillInResults 
+        }
+    })
+})
+```
+The script will look for input elements with the tag ```adressomat-autcomplete=[VALUE]```.<br>
+You can replace ```[VALUE]``` with one or a combination of the following placeholders, to replace it with it's according value, returned from the api.
+- **name** (full and formatted address)
+- **attributes.street** (street of the address)
+- **attributes.housenumber** (housenumber of the address)
+- **attributes.postalcode** (postalcode of the address)
+- **attributes.city** (city of the address)
+- **coordinates.lat** (latitude of the address)
+- **coordinates.lat** (longitude of the address)
+
+If you want to specify where to fill address information by default, when a user clicks a result, you can add the tag ```adressomat-autofill="[VALUE]"``` to any other HTML element that supports the value property (e.g. inputs). This tag also support the values specified above.
+
+Thus, to sum up the information above:
+
+````html
+<input type="search" adressomat-autcomplete="name" adressomat-autofill="attributes.street" placeholder="street">
+<input type="search" adressomat-autofill="attributes.housenumber" placeholder="housenumber">
+````
+You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
+
 ## licensing and contact
-For more informatione, access keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
+For more informatione, api keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
