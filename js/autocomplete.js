@@ -55,6 +55,11 @@ class AdressOMatInput{
                 AdressOMatInput.destroyAllSuggestionPopUps()
             })
         }
+
+        // add listener for scroll
+        window.addEventListener("scroll", function(){
+            AdressOMatInput.refreshPositionOfCurrentPopUp()
+        })
     }
 
     /*
@@ -66,8 +71,8 @@ class AdressOMatInput{
         // style suggestion box
         suggestions.className = "adressomat-suggestions "+input.getAttribute("adressomat-autocomplete")
         suggestions.style.position = "fixed"
-        suggestions.style.top = input.offsetTop+input.offsetHeight
-        suggestions.style.left = input.offsetLeft
+        suggestions.style.top = (AdressOMatInput.getCoords({elem:input}).top+input.offsetHeight) + "px"
+        suggestions.style.left = AdressOMatInput.getCoords({elem:input}).left + "px"
         suggestions.style.width = input.offsetWidth+"px"
         suggestions.style.padding = "8px"
         suggestions.style.backgroundColor = "#fafafa"
@@ -79,11 +84,34 @@ class AdressOMatInput{
 
         // make current popup available for other function
         AdressOMatInput.currentPopUp = suggestions
+        AdressOMatInput.currentInput = input
 
         // add suggestion to dom
         document.body.appendChild(suggestions)
 
         AdressOMatInput.displayMessageInPopUp({message: AdressOMatInput.messages.initial})
+    }
+
+    /*
+    refreshes the position of the current popup
+     */
+    static refreshPositionOfCurrentPopUp(){
+        if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null){
+            AdressOMatInput.currentPopUp.style.top = (AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).top+AdressOMatInput.currentInput.offsetHeight) + "px"
+            AdressOMatInput.currentPopUp.style.left = AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).left + "px"
+        }
+    }
+
+    /*
+    returns the bounding box of an element
+     */
+    static getCoords({elem}) {
+        var box = elem.getBoundingClientRect();
+
+        var top  = box.top;
+        var left = box.left;
+
+        return { top: top, left: left };
     }
 
     static displayMessageInPopUp({message=""}={message:""}){
@@ -108,6 +136,7 @@ class AdressOMatInput{
                     el.parentNode.removeChild(el)
                 }
                 AdressOMatInput.currentPopUp = null
+                AdressOMatInput.currentInput = null
             }
             callback()
         }), timeout)
