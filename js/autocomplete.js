@@ -20,6 +20,8 @@ class AdressOMatInput{
         AdressOMatInput.api = new AdressOMat({ key: key })
         AdressOMatInput.messages = messages
         AdressOMatInput.callbacks = callbacks
+        AdressOMatInput.currentInput = null
+        AdressOMatInput.currentPopUp = null
 
         AdressOMatInput.searchAndSetUpInputs()
     }
@@ -96,7 +98,7 @@ class AdressOMatInput{
     refreshes the position of the current popup
      */
     static refreshPositionOfCurrentPopUp(){
-        if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null && AdressOMatInput.currentPopUp !== undefined && AdressOMatInput.currentInput !== undefined){
+        if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null){
             AdressOMatInput.currentPopUp.style.top = (AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).top+AdressOMatInput.currentInput.offsetHeight) + "px"
             AdressOMatInput.currentPopUp.style.left = AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).left + "px"
         }
