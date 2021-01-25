@@ -96,7 +96,7 @@ class AdressOMatInput{
     refreshes the position of the current popup
      */
     static refreshPositionOfCurrentPopUp(){
-        if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null){
+        if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null && AdressOMatInput.currentPopUp !== undefined && AdressOMatInput.currentInput !== undefined){
             AdressOMatInput.currentPopUp.style.top = (AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).top+AdressOMatInput.currentInput.offsetHeight) + "px"
             AdressOMatInput.currentPopUp.style.left = AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).left + "px"
         }
