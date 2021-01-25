@@ -1,11 +1,13 @@
 ![Adress-O-Mat logo](https://adressomat.de/website/images/logo-color.svg)
 
-[![Generic badge](https://img.shields.io/badge/version-1.0-<COLOR>.svg)](https://adressomat.de)
+[![Generic badge](https://img.shields.io/badge/version-1.1-<COLOR>.svg)](https://adressomat.de)
 [![Generic badge](https://img.shields.io/badge/status-available-<COLOR>.svg)](https://adressomat.de/status)
 # Adress-O-Mat API (JS)
-This is the  the javascript binding's home of the adressomat's api. From here you can download [adressomat.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") and [autocomplete.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/autocomplete.js "Download the js-api-file.") and use it for your projects.
-
-For api keys, data coverage and pricing information, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
+This is the  the javascript binding's home of the adressomat's api. From here you can download [adressomat.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") and [autocomplete.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/autocomplete.js "Download the js-api-file.") or include the latest version directly via the script tags below and use it for your projects.
+```html
+<script src="https://adressomat.de/api/serve/js/adressomat.js"></script>
+<script src="https://adressomat.de/api/serve/js/autocomplete.js"></script>
+```
 
 ## adressomat.js
 Put the ```adressomat.js```-file from the ```js/``` folder into your project and include it.
@@ -86,4 +88,4 @@ Thus, to sum up the information above:
 You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
 
 ## licensing and contact
-For more informatione, api keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
+For more information, data coverage, api keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
