@@ -28,9 +28,9 @@ class AdressOMatInput{
     adds the listeners to all input elements
      */
     static searchAndSetUpInputs(){
-        let inputs = document.querySelectorAll("input[adressomat-autcomplete]")
+        let inputs = document.querySelectorAll("input[adressomat-autocomplete]")
         for(let input of inputs){
-            let placeholder = input.getAttribute("adressomat-autcomplete")
+            let placeholder = input.getAttribute("adressomat-autocomplete")
             input.addEventListener("keyup", function(){
                 if(input.value.length>=3){
                     AdressOMatInput.queryAndDisplayResults({query: input.value, placeholder:placeholder})
@@ -64,7 +64,7 @@ class AdressOMatInput{
         AdressOMatInput.focusIsInInput = true
         let suggestions = document.createElement("div")
         // style suggestion box
-        suggestions.className = "adressomat-suggestions "+input.getAttribute("adressomat-autcomplete")
+        suggestions.className = "adressomat-suggestions "+input.getAttribute("adressomat-autocomplete")
         suggestions.style.position = "fixed"
         suggestions.style.top = input.offsetTop+input.offsetHeight
         suggestions.style.left = input.offsetLeft

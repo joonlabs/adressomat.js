@@ -65,7 +65,7 @@ window.addEventListener("load", function(){
     })
 })
 ```
-The script will look for input elements with the tag ```adressomat-autcomplete=[VALUE]```.<br>
+The script will look for input elements with the tag ```adressomat-autocomplete=[VALUE]```.<br>
 You can replace ```[VALUE]``` with one or a combination of the following placeholders, to replace it with it's according value, returned from the api.
 - **name** (full and formatted address)
 - **attributes.street** (street of the address)
@@ -80,7 +80,7 @@ If you want to specify where to fill address information by default, when a user
 Thus, to sum up the information above:
 
 ````html
-<input type="search" adressomat-autcomplete="name" adressomat-autofill="attributes.street" placeholder="street">
+<input type="search" adressomat-autocomplete="name" adressomat-autofill="attributes.street" placeholder="street">
 <input type="search" adressomat-autofill="attributes.housenumber" placeholder="housenumber">
 ````
 You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
