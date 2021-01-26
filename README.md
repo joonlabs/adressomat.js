@@ -5,8 +5,11 @@
 # Adress-O-Mat API (JS)
 This is the  the javascript binding's home of the adressomat's api. From here you can download [adressomat.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/adressomat.js "Download the js-api-file.") and [autocomplete.js](https://raw.githubusercontent.com/joonlabs/adressomat-api-js/master/js/autocomplete.js "Download the js-api-file.") or include the latest version directly via the script tags below and use it for your projects.
 ```html
+<!-- javascript -->
 <script src="https://adressomat.de/api/serve/js/adressomat.js"></script>
 <script src="https://adressomat.de/api/serve/js/autocomplete.js"></script>
+<!-- css (optional) -->
+<script src="https://adressomat.de/api/serve/css/autocomplete.css"></script>
 ```
 
 ## adressomat.js
@@ -63,6 +66,9 @@ window.addEventListener("load", function(){
         },
         callbacks : { //optional (is default)
             "clickResult" :  AdressOMatInput.fillInResults 
+        },
+        configuration : { // optional (is default for autocomplete.css)
+            "showLogo" : true
         }
     })
 })
