@@ -64,9 +64,8 @@ class AdressOMatInput{
         }
 
         // add listener for scroll
-        window.addEventListener("scroll", function(){
-            AdressOMatInput.refreshPositionOfCurrentPopUp()
-        })
+        window.addEventListener("scroll", AdressOMatInput.refreshPositionOfCurrentPopUp)
+        window.addEventListener("resize", AdressOMatInput.refreshPositionOfCurrentPopUp)
     }
 
     /*
