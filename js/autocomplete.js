@@ -2,16 +2,20 @@ class AdressOMatInput{
     /*
     initiates the adressomat and looks for input elements with the specified tag
      */
-    static init({key, messages, callbacks}={key:null, messages:{}, callbacks:{}}){
+    static init({key, messages, callbacks, configuration={}}={key:null, messages:{}, callbacks:{}, configuration:{}}){
         key = key || window.ADRESSOMAT_APIKEY || null
         messages = messages || {}
         callbacks = callbacks || {}
+        configuration = configuration || {}
         messages = {
             "initial" : ("initial" in messages) ? messages.initial : "Mindestens 3 Buchstaben eingeben...",
             "noData" : ("noData" in messages) ? messages.noData : "Keine Ergebnisse gefunden",
         }
         callbacks = {
             "clickResult" : ("clickResult" in callbacks) ? callbacks.clickResult : AdressOMatInput.fillInResults
+        }
+        configuration = {
+            "showLogo" : ("showLogo" in configuration) ? configuration.showLogo : true
         }
 
         if(key===undefined) throw new MissingAPIKeyError("Please specify an API Key to authtenticate your requests. You can re-init the Adress-O-Mat input autocomplete by calling AdressOMat.init()")
@@ -20,6 +24,7 @@ class AdressOMatInput{
         AdressOMatInput.api = new AdressOMat({ key: key })
         AdressOMatInput.messages = messages
         AdressOMatInput.callbacks = callbacks
+        AdressOMatInput.configuration = configuration
         AdressOMatInput.currentInput = null
         AdressOMatInput.currentPopUp = null
 
@@ -71,16 +76,11 @@ class AdressOMatInput{
         AdressOMatInput.focusIsInInput = true
         let suggestions = document.createElement("div")
         // style suggestion box
-        suggestions.className = "adressomat-suggestions "+input.getAttribute("adressomat-autocomplete")
+        suggestions.className = "adressomat-suggestions "+input.getAttribute("adressomat-autocomplete")+" "+(AdressOMatInput.configuration.showLogo===true ? "showLogo" : "")
         suggestions.style.position = "fixed"
         suggestions.style.top = (AdressOMatInput.getCoords({elem:input}).top+input.offsetHeight) + "px"
         suggestions.style.left = AdressOMatInput.getCoords({elem:input}).left + "px"
         suggestions.style.width = input.offsetWidth+"px"
-        suggestions.style.padding = "8px"
-        suggestions.style.backgroundColor = "#fafafa"
-        suggestions.style.boxSizing = "border-box"
-        suggestions.style.borderBottomLeftRadius = "3px"
-        suggestions.style.borderBottomRightRadius = "3px"
 
         suggestions.setAttribute("adressomat-popup", "")
 

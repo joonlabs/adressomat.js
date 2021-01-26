@@ -1,0 +1,36 @@
+.adressomat-suggestions{
+    box-sizing: border-box;
+    background: #ffffff;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+    padding: 10px 0;
+    margin-top: 3px;
+    max-height: 500px;
+    overflow: auto;
+}
+.adressomat-suggestions.showLogo::after{
+    content: '';
+    display: block;
+    float: right;
+    margin: 5px 20px 5px 0;
+    width: 90px;
+    height: 20px;
+    background-image: url("https://adressomat.de/website/images/logo-color.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.adressomat-suggestions > .suggestion{
+    padding: 10px 20px;
+    cursor: default;
+    transition: all .1s;
+}
+.adressomat-suggestions > .suggestion:not(.hint):hover{
+    background: #f3f3f3;
+    cursor: pointer;
+}
+
+.adressomat-suggestions > .suggestion.hint{
+    color: #dfdfdf;
+}

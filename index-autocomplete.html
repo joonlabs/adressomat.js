@@ -2,6 +2,8 @@
 <head>
     <title>Adressomat API Implementation</title>
     <meta charSet="utf-8">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="css/autocomplete.css">
     <!-- API Implementation -->
     <script src="js/adressomat.js"></script>
     <script src="js/autocomplete.js"></script>
@@ -15,6 +17,9 @@
                 },
                 callbacks : {
                     "clickResult" :  AdressOMatInput.fillInResults
+                },
+                configuration : {
+                    "showLogo" : true
                 }
             })
         })
