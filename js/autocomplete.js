@@ -64,8 +64,8 @@ class AdressOMatInput{
         }
 
         // add listener for scroll
-        window.addEventListener("scroll", AdressOMatInput.refreshPositionOfCurrentPopUp)
-        window.addEventListener("resize", AdressOMatInput.refreshPositionOfCurrentPopUp)
+        window.addEventListener("scroll", AdressOMatInput.refreshPositionAndWidthOfCurrentPopUp)
+        window.addEventListener("resize", AdressOMatInput.refreshPositionAndWidthOfCurrentPopUp)
     }
 
     /*
@@ -96,10 +96,11 @@ class AdressOMatInput{
     /*
     refreshes the position of the current popup
      */
-    static refreshPositionOfCurrentPopUp(){
+    static refreshPositionAndWidthOfCurrentPopUp(){
         if(AdressOMatInput.currentPopUp !== null && AdressOMatInput.currentInput !== null){
             AdressOMatInput.currentPopUp.style.top = (AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).top+AdressOMatInput.currentInput.offsetHeight) + "px"
             AdressOMatInput.currentPopUp.style.left = AdressOMatInput.getCoords({elem:AdressOMatInput.currentInput}).left + "px"
+            AdressOMatInput.currentPopUp.style.width = AdressOMatInput.currentInput.offsetWidth+"px"
         }
     }
 
