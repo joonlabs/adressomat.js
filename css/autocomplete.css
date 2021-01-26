@@ -5,7 +5,7 @@
     border-radius: 3px;
     padding: 10px 0;
     margin-top: 3px;
-    max-height: 500px;
+    max-height: 350px;
     overflow: auto;
 }
 .adressomat-suggestions.showLogo::after{
@@ -13,7 +13,7 @@
     display: block;
     float: right;
     margin: 5px 20px 5px 0;
-    width: 90px;
+    width: 100px;
     height: 20px;
     background-image: url("https://adressomat.de/website/images/logo-color.svg");
     background-size: contain;

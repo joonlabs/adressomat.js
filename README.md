@@ -9,7 +9,7 @@ This is the  the javascript binding's home of the adressomat's api. From here yo
 <script src="https://adressomat.de/api/serve/js/adressomat.js"></script>
 <script src="https://adressomat.de/api/serve/js/autocomplete.js"></script>
 <!-- css (optional) -->
-<script src="https://adressomat.de/api/serve/css/autocomplete.css"></script>
+<link rel="stylesheet" href="https://adressomat.de/api/serve/css/autocomplete.css"></link>
 ```
 
 ## adressomat.js
