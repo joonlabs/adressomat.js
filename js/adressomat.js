@@ -1,12 +1,11 @@
 class AdressOMat{
-    key = undefined;
-    API_ENDPOINT = "https://adressomat.de/api/";
-    API_MODULES = ["address", "geo"];
-
     /*
     create an instance of the Adressomat-class
     */
     constructor({key}={key:null}) {
+        this.API_ENDPOINT = "https://adressomat.de/api/";
+        this.API_MODULES = ["address", "geo"];
+
         this.setKey({
             key : key
         })
