@@ -148,7 +148,7 @@ class _AdressOMatMap {
 
         this.map = new window.mapboxgl.Map({
             container: container,
-            style: "https://maps.adressomat.de/api/style?key=" + key,
+            style: "https://maps.adressomat.de/api/style/?key=" + key,
             center: [longitude, latitude],
             zoom: zoom
         });
