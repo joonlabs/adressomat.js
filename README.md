@@ -93,5 +93,43 @@ Thus, to sum up the information above:
 ````
 You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
 
+## maps
+To use maps, the mapbox-gl framework is required additionally.
+
+```html
+<script src='https://adressomat.de/api/serve/js/mapbox-gl.js'></script>
+<link href='https://adressomat.de/api/serve/css/mapbox-gl.css' rel='stylesheet' />
+```
+
+You can then display maps, markers and popups and fly to locations around the world.
+```js
+let api = new AdressOMat({key: "YOUR_API_KEY_HERE"})
+
+// render a map in the div container with the id "map"
+let map = api.Map({
+    container: "map",
+    latitude: 51.754566,
+    longitude: 8.59941,
+    zoom: 11
+})
+
+// add a marker with popup to the map
+map.addMarker({
+    latitude: 51.754566,
+    longitude: 8.59941,
+    className: "marker",
+    popupContent: "<h3>AdressOMat</h3>Spielplatzstraße 19",
+    popupOffset: 5
+})
+
+// fly to a random point
+map.flyTo({
+    latitude: 51 + (Math.random() - 0.5) * 5,
+    longitude: 8 + (Math.random() - 0.5) * 5,
+    zoom: 14,
+    maxDuration: 2000
+})
+```
+
 ## licensing and contact
 For more information, data coverage, api keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
