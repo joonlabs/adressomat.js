@@ -100,6 +100,15 @@ To use maps, the mapbox-gl framework is required additionally.
 <script src='https://adressomat.de/api/serve/js/mapbox-gl.js'></script>
 <link href='https://adressomat.de/api/serve/css/mapbox-gl.css' rel='stylesheet' />
 ```
+Also, if you want to use markers, a style for them should be created.
+```css
+.marker{
+    width: 30px;
+    height: 30px;
+    background: #000000;
+    border-radius: 50%;
+}
+```
 
 You can then display maps, markers and popups and fly to locations around the world.
 ```js
@@ -117,17 +126,18 @@ let map = api.Map({
 map.addMarker({
     latitude: 51.754566,
     longitude: 8.59941,
-    className: "marker",
-    popupContent: "<h3>AdressOMat</h3>Spielplatzstraße 19",
-    popupOffset: 5
+    className: "marker", // optional (default is "marker")
+    popupContent: "<h3>AdressOMat</h3>Spielplatzstraße 19", // optional (default is no popup)
+    popupOffset: 5, // optional (default is false)
+    popupVisible: false // optional (default is false)
 })
 
 // fly to a random point
 map.flyTo({
     latitude: 51 + (Math.random() - 0.5) * 5,
     longitude: 8 + (Math.random() - 0.5) * 5,
-    zoom: 14,
-    maxDuration: 2000
+    zoom: 14, // optional (default is 14)
+    maxDuration: 6000 // optional (default is 6000) 
 })
 ```
 
