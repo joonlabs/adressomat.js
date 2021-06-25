@@ -162,8 +162,9 @@ class _AdressOMatMap {
      * @param className class name of the marker
      * @param popupContent HTML formatted content of the popup
      * @param popupOffset offset of the popup
+     * @param popupVisible shows the popup by default if true
      */
-    addMarker({latitude, longitude, className, popupContent, popupOffset}) {
+    addMarker({latitude, longitude, className, popupContent, popupOffset, popupVisible}) {
         let el = document.createElement("div")
         el.className = className || "marker"
 
@@ -173,6 +174,9 @@ class _AdressOMatMap {
             marker.setPopup(new window.mapboxgl.Popup({offset: popupOffset}).setHTML(popupContent))
 
         marker.addTo(this.map)
+
+        if(popupVisible)
+            marker.togglePopup()
     }
 
     /**
