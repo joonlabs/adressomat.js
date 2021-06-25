@@ -54,46 +54,7 @@ api.geocode({
 ```
 You can also find a basic implementation of the api in the ```index.html``` file in the root of the repo.
 
-## autocomplete.js
-The ```autocomplete.js``` script is an extension to the basic ```adressomat.js``` implementation. Include both scripts in your page and initialize the autocompletion of input elements on your page as described below. 
-```javascript
-window.addEventListener("load", function(){
-    AdressOMatInput.init({
-        key: "YOUR_API_KEY_HERE",
-        messages : { //optional (is default)
-            "initial" : "Mindestens 3 Buchstaben eingeben...",
-            "noData" : "Keine Ergebnisse gefunden",
-        },
-        callbacks : { //optional (is default)
-            "clickResult" :  AdressOMatInput.fillInResults 
-        },
-        configuration : { // optional (is default for autocomplete.css)
-            "showLogo" : true
-        }
-    })
-})
-```
-The script will look for input elements with the tag ```adressomat-autocomplete=[VALUE]```.<br>
-You can replace ```[VALUE]``` with one or a combination of the following placeholders, to replace it with it's according value, returned from the api.
-- **name** (full and formatted address)
-- **attributes.street** (street of the address)
-- **attributes.housenumber** (housenumber of the address)
-- **attributes.postalcode** (postalcode of the address)
-- **attributes.city** (city of the address)
-- **coordinates.lat** (latitude of the address)
-- **coordinates.lat** (longitude of the address)
-
-If you want to specify where to fill address information by default, when a user clicks a result, you can add the tag ```adressomat-autofill="[VALUE]"``` to any other HTML element that supports the value property (e.g. inputs). This tag also support the values specified above.
-
-Thus, to sum up the information above:
-
-````html
-<input type="search" adressomat-autocomplete="name" adressomat-autofill="attributes.street" placeholder="street">
-<input type="search" adressomat-autofill="attributes.housenumber" placeholder="housenumber">
-````
-You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
-
-## maps
+### maps
 To use maps, the mapbox-gl framework is required additionally.
 
 ```html
@@ -140,6 +101,45 @@ map.flyTo({
     maxDuration: 6000 // optional (default is 6000) 
 })
 ```
+
+## autocomplete.js
+The ```autocomplete.js``` script is an extension to the basic ```adressomat.js``` implementation. Include both scripts in your page and initialize the autocompletion of input elements on your page as described below. 
+```javascript
+window.addEventListener("load", function(){
+    AdressOMatInput.init({
+        key: "YOUR_API_KEY_HERE",
+        messages : { //optional (is default)
+            "initial" : "Mindestens 3 Buchstaben eingeben...",
+            "noData" : "Keine Ergebnisse gefunden",
+        },
+        callbacks : { //optional (is default)
+            "clickResult" :  AdressOMatInput.fillInResults 
+        },
+        configuration : { // optional (is default for autocomplete.css)
+            "showLogo" : true
+        }
+    })
+})
+```
+The script will look for input elements with the tag ```adressomat-autocomplete=[VALUE]```.<br>
+You can replace ```[VALUE]``` with one or a combination of the following placeholders, to replace it with it's according value, returned from the api.
+- **name** (full and formatted address)
+- **attributes.street** (street of the address)
+- **attributes.housenumber** (housenumber of the address)
+- **attributes.postalcode** (postalcode of the address)
+- **attributes.city** (city of the address)
+- **coordinates.lat** (latitude of the address)
+- **coordinates.lat** (longitude of the address)
+
+If you want to specify where to fill address information by default, when a user clicks a result, you can add the tag ```adressomat-autofill="[VALUE]"``` to any other HTML element that supports the value property (e.g. inputs). This tag also support the values specified above.
+
+Thus, to sum up the information above:
+
+````html
+<input type="search" adressomat-autocomplete="name" adressomat-autofill="attributes.street" placeholder="street">
+<input type="search" adressomat-autofill="attributes.housenumber" placeholder="housenumber">
+````
+You can also find a basic implementation of the autocompletion feature in the ```index-autocomplete.html``` file in the root of the repo.
 
 ## licensing and contact
 For more information, data coverage, api keys and anything else, see [adressomat.de](https://adressomat.de "Adressomat Homepage").
