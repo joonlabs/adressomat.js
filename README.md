@@ -105,7 +105,7 @@ map.flyTo({
 
 // disable zoom on scroll
 map.disableZoom({
-    allowCtr: false // optional (default is false) 
+    allowCtrl: false // optional (default is false) 
 })
 
 // register an click event handler

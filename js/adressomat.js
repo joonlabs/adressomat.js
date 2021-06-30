@@ -169,12 +169,12 @@ class AdressOMatMap {
      * disables the zoom function of the map
      * @return {AdressOMatMap}
      */
-    disableZoom({allowCtr}={}) {
+    disableZoom({allowCtrl}={}) {
         let _this = this
 
         this.map.scrollZoom.disable()
 
-        if(allowCtr){
+        if(allowCtrl){
             this.container.addEventListener("wheel", function(e){
                 if(e.ctrlKey) {
                     _this.container.setAttribute("ctrl-zoom-blocked", "false")
