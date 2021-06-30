@@ -9,7 +9,7 @@ This is the  the javascript binding's home of the adressomat's api. From here yo
 <script src="https://adressomat.de/api/serve/js/adressomat.js"></script>
 <script src="https://adressomat.de/api/serve/js/autocomplete.js"></script>
 <!-- css (optional) -->
-<link rel="stylesheet" href="https://adressomat.de/api/serve/css/autocomplete.css"></link>
+<link rel="stylesheet" href="https://adressomat.de/api/serve/css/autocomplete.css"/>
 ```
 
 ## adressomat.js
@@ -58,8 +58,8 @@ You can also find a basic implementation of the api in the ```index.html``` file
 To use maps, the mapbox-gl framework is required additionally.
 
 ```html
-<script src='https://adressomat.de/api/serve/js/mapbox-gl.js'></script>
-<link href='https://adressomat.de/api/serve/css/mapbox-gl.css' rel='stylesheet' />
+<script src="https://adressomat.de/api/serve/js/mapbox-gl.js"></script>
+<link rel="stylesheet" href="https://adressomat.de/api/serve/css/mapbox-gl.css"/>
 ```
 Also, if you want to use markers, a style for them should be created.
 ```css
@@ -84,14 +84,16 @@ let map = api.Map({
 })
 
 // add a marker with popup to the map
-map.addMarker({
+map.Marker({
     latitude: 51.754566,
     longitude: 8.59941,
     className: "marker", // optional (default is "marker")
-    popupContent: "<h3>AdressOMat</h3>Spielplatzstraße 19", // optional (default is no popup)
-    popupOffset: 5, // optional (default is false)
-    popupVisible: false // optional (default is false)
-})
+}).setPopup({
+    content: "<h3>AdressOMat</h3>Spielplatzstraße 19",
+    offset: [0, 5]
+}).render({
+    map
+}).togglePopup()
 
 // fly to a random point
 map.flyTo({
@@ -99,6 +101,19 @@ map.flyTo({
     longitude: 8 + (Math.random() - 0.5) * 5,
     zoom: 14, // optional (default is 14)
     maxDuration: 6000 // optional (default is 6000) 
+})
+
+// disable zoom on scroll
+map.disableZoom({
+    allowCtr: false // optional (default is false) 
+})
+
+// register an click event handler
+map.on({
+    event: "click",
+    handler: function(event){
+        alert(`You clicked at: (${event.lngLat.lat}, ${event.lngLat.lng})`)
+    }
 })
 ```
 

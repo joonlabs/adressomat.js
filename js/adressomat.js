@@ -124,18 +124,18 @@ class AdressOMat {
      * @param latitude latitude of the map's center
      * @param longitude longitude of the map's center
      * @param zoom zoom level of the map
-     * @returns {_AdressOMatMap}
+     * @returns {AdressOMatMap}
      * @constructor
      */
     Map({container, latitude, longitude, zoom}) {
         let key = this.getKey()
-        return new _AdressOMatMap({container, latitude, longitude, zoom, key})
+        return new AdressOMatMap({container, latitude, longitude, zoom, key})
     }
 }
 
-class _AdressOMatMap {
+class AdressOMatMap {
     /**
-     * creates a new _AdressOMatMap
+     * creates a new AdressOMatMap
      * @param container id of the div container the map is rendered in
      * @param latitude latitude of the map's center
      * @param longitude longitude of the map's center
@@ -146,6 +146,8 @@ class _AdressOMatMap {
         if (window.mapboxgl === undefined)
             throw new MissingMapBoxGLError("mapbox-gl.js must be included to display a map. e.g. use https://adressomat.de/api/serve/js/mapbox-gl.js")
 
+        this.container = document.getElementById(container)
+
         this.map = new window.mapboxgl.Map({
             container: container,
             style: "https://maps.adressomat.de/api/style/?key=" + key,
@@ -154,27 +156,47 @@ class _AdressOMatMap {
         });
     }
 
+    /**
+     * disables the zoom function of the map
+     * @return {AdressOMatMap}
+     */
+    enableZoom() {
+        this.map.scrollZoom.enable()
+        return this
+    }
 
     /**
-     * adds a marker to the map
-     * @param latitude latitude of the marker
-     * @param longitude longitude of the marker
-     * @param className class name of the marker
-     * @param popup information about the popup {content, offset, visible}
+     * disables the zoom function of the map
+     * @return {AdressOMatMap}
      */
-    addMarker({latitude, longitude, className, popup}) {
-        let el = document.createElement("div")
-        el.className = className || "marker"
+    disableZoom({allowCtr}={}) {
+        let _this = this
 
-        let marker = new window.mapboxgl.Marker(el).setLngLat([longitude, latitude])
+        this.map.scrollZoom.disable()
 
-        if (popup !== undefined)
-            marker.setPopup(new window.mapboxgl.Popup({offset: (popup.offset || 0)}).setHTML(popup.content || ""))
+        if(allowCtr){
+            this.container.addEventListener("wheel", function(e){
+                if(e.ctrlKey) {
+                    _this.container.setAttribute("ctrl-zoom-blocked", "false")
+                    _this.map.scrollZoom.enable()
+                } else {
+                    _this.container.setAttribute("ctrl-zoom-blocked", "true")
+                    _this.map.scrollZoom.disable()
+                }
+            })
+        }
+        return this
+    }
 
-        marker.addTo(this.map)
-
-        if(popup !== undefined && popup.visible)
-            marker.togglePopup()
+    /**
+     * registers an handler for an event
+     * @param {String} event
+     * @param {Function} handler
+     * @return {AdressOMatMap}
+     */
+    on({event, handler}){
+        this.map.on(event, handler)
+        return this
     }
 
     /**
@@ -183,6 +205,7 @@ class _AdressOMatMap {
      * @param longitude longitude of the location
      * @param duration duration of the animation in ms
      * @param zoom final zoom level
+     * @return {AdressOMatMap}
      */
     flyTo({latitude, longitude, duration, zoom}) {
         this.map.flyTo({
@@ -194,6 +217,84 @@ class _AdressOMatMap {
             duration: duration || 6000,
             essential: true
         });
+        return this
+    }
+
+    /**
+     * creates a new marker
+     * @param latitude
+     * @param longitude
+     * @param className
+     * @constructor
+     */
+    Marker({latitude, longitude, className}) {
+        return new AdressOMapMarker({
+            latitude,
+            longitude,
+            className
+        })
+    }
+}
+
+class AdressOMapMarker {
+    /**
+     * creates a new AdressOMapMarker
+     * @param latitude
+     * @param longitude
+     * @param className
+     */
+    constructor({latitude, longitude, className}) {
+        let el = document.createElement("div")
+        el.className = className || "marker"
+
+        this.marker = new window.mapboxgl.Marker(el).setLngLat([longitude, latitude])
+    }
+
+    /**
+     * sets the pop up content
+     * @param {String} content
+     * @param {Number, [Number], Object} [offset]
+     * @returns {AdressOMapMarker}
+     */
+    setPopup({content, offset}) {
+        this.marker.setPopup(new window.mapboxgl.Popup({offset: (offset || 0)}).setHTML(content || ""))
+        return this
+    }
+
+    /**
+     * renders the marker on the map
+     * @param {AdressOMatMap} map
+     * @returns {AdressOMapMarker}
+     */
+    render({map}) {
+        this.marker.addTo(map.map)
+        return this
+    }
+
+    /**
+     * toggles the marker's popup
+     * @returns {AdressOMapMarker}
+     */
+    togglePopup() {
+        this.marker.togglePopup()
+        return this
+    }
+
+    /**
+     * returns the marker's HTML-Element
+     * @return {*}
+     */
+    getElement() {
+        return this.marker.getElement()
+    }
+
+    /**
+     * removes a marker from the map
+     * @returns {AdressOMapMarker}
+     */
+    remove() {
+        this.marker.remove()
+        return this
     }
 }
 

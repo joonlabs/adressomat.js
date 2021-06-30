@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <title>Adressomat API Implementation</title>
+    <meta charSet="utf-8">
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="css/autocomplete.css">
+    <link rel="stylesheet" href="https://adressomat.de/api/serve/css/mapbox-gl.css"/>
+    <!-- API Implementation -->
+    <script src="js/adressomat.js"></script>
+    <script src="https://adressomat.de/api/serve/js/mapbox-gl.js"></script>
+
+    <script>
+        window.addEventListener("load", function () {
+            let api = new AdressOMat({key: "YOUR_API_KEY_HERE"})
+            let map = api.Map({
+                container: "map",
+                latitude: 51.754566,
+                longitude: 8.59941,
+                zoom: 11
+            })
+
+            map.disableZoom({allowCtr: true})
+
+            map.Marker({
+                latitude: 51.754566,
+                longitude: 8.59941,
+                className: "marker", // optional (default is "marker")
+            }).setPopup({
+                content: "<h3>AdressOMat</h3>Spielplatzstraße 19",
+                offset: [0, 5]
+            }).render({
+                map
+            }).togglePopup()
+        })
+
+    </script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56%;
+        }
+
+        .marker {
+            width: 30px;
+            height: 30px;
+            background: #000000;
+            border-radius: 50%;
+            margin: -15px 0 0 -15px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+</html>
