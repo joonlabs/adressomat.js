@@ -12,7 +12,8 @@ class AdressOMatInput{
             "noData" : ("noData" in messages) ? messages.noData : "Keine Ergebnisse gefunden",
         }
         callbacks = {
-            "clickResult" : ("clickResult" in callbacks) ? callbacks.clickResult : AdressOMatInput.fillInResults
+            "clickResult" : ("clickResult" in callbacks) ? callbacks.clickResult : AdressOMatInput.fillInResults,
+            "queryContext" : ("queryContext" in callbacks) ? callbacks.queryContext : AdressOMatInput.getQueryContext,
         }
         configuration = {
             "showLogo" : ("showLogo" in configuration) ? configuration.showLogo : true
@@ -167,6 +168,7 @@ class AdressOMatInput{
         AdressOMatInput.api.query({
             query: query,
             limit: 35,
+            context: AdressOMatInput.callbacks.queryContext(),
             callbackSuccess: function (data) {
                 // reset suggestions
                 AdressOMatInput.currentPopUp.innerHTML = ""
@@ -217,6 +219,18 @@ class AdressOMatInput{
         for(let input of inputs){
             let placeholder = input.getAttribute("adressomat-autofill")
             input.value = AdressOMatInput.formatPlaceholderWithData({placeholder:placeholder, data:data})
+        }
+    }
+
+    /*
+    fills all inputs in page with given data
+     */
+    static getQueryContext(){
+        return {
+            street: null,
+            housenumber: null,
+            postalcode: null,
+            city: null,
         }
     }
 }

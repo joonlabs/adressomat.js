@@ -29,13 +29,18 @@ class AdressOMat {
      * creates a query and passes the results to the callback function(s)
      * @param query query sent to the server
      * @param limit max number of entries
+     * @param context context for the query
      * @param callbackSuccess function called on data receive
      * @param callbackError function called on error
      */
     query({
-              query = "", limit = 50, callbackSuccess = function () {
-        }, callbackError = function () {
-        }
+              query = "",
+              limit = 50,
+              context = null,
+              callbackSuccess = function () {
+              },
+              callbackError = function () {
+              }
           }) {
         query = query || ""
         limit = limit || 50
@@ -54,14 +59,24 @@ class AdressOMat {
                 let response = JSON.parse(xhttp.responseText);
                 callbackError(response);
             }
+        };
+
+        // check for context
+        let contextQueryString = "";
+        if (context !== null) {
+            if (context.street) contextQueryString += "&street=" + encodeURIComponent(context.street)
+            if (context.housenumber) contextQueryString += "&housenumber=" + encodeURIComponent(context.housenumber)
+            if (context.postalcode) contextQueryString += "&postalcode=" + encodeURIComponent(context.postalcode)
+            if (context.city) contextQueryString += "&city=" + encodeURIComponent(context.city)
         }
-        ;
+
         xhttp.open(
             "GET",
             this.API_ENDPOINT + this.API_MODULES[0] +
             "/?query=" + encodeURIComponent(query) +
             "&limit=" + encodeURIComponent(limit) +
-            "&key=" + this.getKey(), true
+            "&key=" + this.getKey() +
+            contextQueryString, true
         );
         xhttp.send();
     }
@@ -175,14 +190,14 @@ class AdressOMatMap {
      * disables the zoom function of the map
      * @return {AdressOMatMap}
      */
-    disableZoom({allowCtrl}={}) {
+    disableZoom({allowCtrl} = {}) {
         let _this = this
 
         this.map.scrollZoom.disable()
 
-        if(allowCtrl){
-            this.container.addEventListener("wheel", function(e){
-                if(e.ctrlKey) {
+        if (allowCtrl) {
+            this.container.addEventListener("wheel", function (e) {
+                if (e.ctrlKey) {
                     _this.container.setAttribute("ctrl-zoom-blocked", "false")
                     _this.map.scrollZoom.enable()
                 } else {
@@ -200,7 +215,7 @@ class AdressOMatMap {
      * @param {Function} handler
      * @return {AdressOMatMap}
      */
-    on({event, handler}){
+    on({event, handler}) {
         this.map.on(event, handler)
         return this
     }
