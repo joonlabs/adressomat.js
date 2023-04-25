@@ -141,12 +141,13 @@ class AdressOMat {
      * @param zoom zoom level of the map
      * @param minZoom minimal allowed zoom level of the map
      * @param maxZoom maximal allowed zoom level of the map
+     * @param style different style of the map (e.g. "outdoors")
      * @returns {AdressOMatMap}
      * @constructor
      */
-    Map({container, latitude, longitude, zoom, minZoom, maxZoom}) {
+    Map({container, latitude, longitude, zoom, minZoom, maxZoom, style}) {
         let key = this.getKey()
-        return new AdressOMatMap({container, latitude, longitude, zoom, minZoom, maxZoom, key})
+        return new AdressOMatMap({container, latitude, longitude, zoom, minZoom, maxZoom, key, style})
     }
 }
 
@@ -159,9 +160,10 @@ class AdressOMatMap {
      * @param zoom zoom level of the map
      * @param minZoom minimal allowed zoom level of the map
      * @param maxZoom maximal allowed zoom level of the map
+     * @param style different style of the map (e.g. "outdoors")
      * @param key api key
      */
-    constructor({container, latitude, longitude, zoom, minZoom, maxZoom, key}) {
+    constructor({container, latitude, longitude, zoom, minZoom, maxZoom, key, style}) {
         if (window.mapboxgl === undefined)
             throw new MissingMapBoxGLError("mapbox-gl.js must be included to display a map. e.g. use https://adressomat.de/api/serve/js/mapbox-gl.js")
 
@@ -169,7 +171,7 @@ class AdressOMatMap {
 
         this.map = new window.mapboxgl.Map({
             container: container,
-            style: "https://maps.adressomat.de/api/style/?key=" + key,
+            style: "https://maps.adressomat.de/api/style/?key=" + key + "&style=" + style,
             center: [longitude, latitude],
             zoom: zoom,
             minZoom: minZoom,
